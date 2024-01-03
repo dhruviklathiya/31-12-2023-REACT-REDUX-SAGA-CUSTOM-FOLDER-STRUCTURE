@@ -1,4 +1,4 @@
-const { GET_USER_PROCESS, GET_USER_SUCCESS, GET_USER_ERROR, POST_USER_PROCESS, POST_USER_SUCCESS, POST_USER_ERROR, DELETE_USER_SUCCESS, DELETE_USER_ERROR, DELETE_USER_PROCESS } = require("../ACTIONS/user_action");
+const { GET_USER_PROCESS, GET_USER_SUCCESS, GET_USER_ERROR, POST_USER_PROCESS, POST_USER_SUCCESS, POST_USER_ERROR, DELETE_USER_SUCCESS, DELETE_USER_ERROR, DELETE_USER_PROCESS, UPDATE_USER_PROCESS, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR } = require("../ACTIONS/user_action");
 
 const initialState = {
     user_data: [],
@@ -66,6 +66,28 @@ export const user_reducer = (state = initialState, action) => {
             }
         }
         case DELETE_USER_ERROR:{
+            return{
+                ...state,
+                isError:true,
+                isLoading:false,
+                data
+            }
+        }
+        case UPDATE_USER_PROCESS:{
+            return{
+                ...state,
+                isLoading:true,
+            }
+        }
+        case UPDATE_USER_SUCCESS:{
+            const index = action.index
+            const data = action.data
+            state.user_data.splice(index,1,data)
+            return{
+                ...state,
+            }
+        }
+        case UPDATE_USER_ERROR:{
             return{
                 ...state,
                 isError:true,

@@ -34,3 +34,19 @@ export const delete_user = async(action) => {
         console.log(error);
     })
 }
+
+export const update_user = async(action) => {
+    return axios.put(`http://localhost:3001/posts/${action.payload.id}`,action.payload).then((res)=>{
+        const data = res.data
+        const status = res.status
+        const index = action.index
+        return{
+            // index,
+            data,
+            status,
+            index
+        }
+    }).catch((error)=>{
+        console.log(error);
+    })
+}
